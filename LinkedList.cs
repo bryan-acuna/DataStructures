@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,6 +49,19 @@ namespace LinkedList1
         /// <param name="value"></param>
         public void AddNodeToBeggining(T value)
         {
+            Node<T> newNode = new Node<T>(value);
+            Node<T> current;
+            if (headNode == null)
+            {
+                headNode = newNode;
+                lastNode = newNode;
+            }
+            else
+            {
+                current = headNode;
+                headNode = newNode;
+                headNode.Next = current;
+            }
 
         }
 
@@ -61,6 +74,30 @@ namespace LinkedList1
             {
                 Console.WriteLine("The list is empty");
             }
+            
+            else
+            {
+                Node<T> current;
+                current = headNode;
+                if (headNode.Value.Equals(value))
+                {
+                    headNode = headNode.Next;
+                }
+                else
+                {
+                    while (!(current.Next == null))
+                    {
+                        if (!current.Next.Value.Equals(value))
+                        {
+                            current = current.Next;
+                        }
+                        else
+                        {
+                            current.Next = current.Next.Next;
+                        }
+                    }
+                }
+            }
 
 
         }
@@ -71,6 +108,24 @@ namespace LinkedList1
         /// <param name="value"></param>
         public bool FindNode(T value)
         {
+            Node<T> current = headNode;
+            if (headNode.Value.Equals(value))
+            {
+                Console.WriteLine($"Found {value}");
+                return true;
+            }
+            while (current.Next != null)
+            {
+                if (current.Next.Value.Equals(value))
+                {
+                    Console.WriteLine($"Found {value}");
+                    return true;
+                }
+                else
+                {
+                    current = current.Next;
+                }
+            }
             return true;
         }
 
@@ -85,7 +140,7 @@ namespace LinkedList1
             }
             Node<T> number = headNode;
             Node<T> current = headNode;
-            while (!(number == null))
+            while ((number != null))
             {
                 Console.WriteLine(number.Value);
                 current = number;
@@ -96,7 +151,7 @@ namespace LinkedList1
         /// <summary>
         /// This functions converts Array to LinkedList 
         /// </summary>
-        public void convertArraytoList()
+        public void convertArraytoList(T []arr)
         {
 
         }
